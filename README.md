@@ -1,9 +1,14 @@
-# api documentation for  [replacestream (v4.0.2)](https://github.com/eugeneware/replacestream#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-replacestream.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-replacestream) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-replacestream.svg)](https://travis-ci.org/npmdoc/node-npmdoc-replacestream)
+# npmdoc-replacestream
+
+#### api documentation for  [replacestream (v4.0.2)](https://github.com/eugeneware/replacestream#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-replacestream.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-replacestream) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-replacestream.svg)](https://travis-ci.org/npmdoc/node-npmdoc-replacestream)
+
 #### A node.js through stream that does basic streaming text search and replace and is chunk boundary friendly
 
-[![NPM](https://nodei.co/npm/replacestream.png?downloads=true)](https://www.npmjs.com/package/replacestream)
+[![NPM](https://nodei.co/npm/replacestream.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/replacestream)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-replacestream/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-replacestream_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-replacestream/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-replacestream/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-replacestream/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-replacestream/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-replacestream/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-replacestream/build/screenCapture.npmPackageListing.svg)
 
@@ -17,8 +22,7 @@
 
 {
     "author": {
-        "name": "Eugene Ware",
-        "email": "eugene@noblesamurai.com"
+        "name": "Eugene Ware"
     },
     "bugs": {
         "url": "https://github.com/eugeneware/replacestream/issues"
@@ -58,21 +62,17 @@
     "license": "BSD-3-Clause",
     "maintainers": [
         {
-            "name": "eugeneware",
-            "email": "eugene@noblesamurai.com"
+            "name": "eugeneware"
         },
         {
-            "name": "mehtaphysical",
-            "email": "me@ryanmehta.me"
+            "name": "mehtaphysical"
         },
         {
-            "name": "shinnn",
-            "email": "snnskwtnb@gmail.com"
+            "name": "shinnn"
         }
     ],
     "name": "replacestream",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/eugeneware/replacestream.git"
@@ -85,16 +85,6 @@
     "version": "4.0.2"
 }
 ```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module replacestream](#apidoc.module.replacestream)
-
-
-
-# <a name="apidoc.module.replacestream"></a>[module replacestream](#apidoc.module.replacestream)
 
 
 
