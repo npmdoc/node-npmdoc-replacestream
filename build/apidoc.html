@@ -61,12 +61,123 @@
 
     <li class="apidocModuleLi"><a href="#apidoc.module.replacestream">module replacestream</a><ol>
 
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.replacestream.replacestream">
+            function <span class="apidocSignatureSpan"></span>replacestream
+            <span class="apidocSignatureSpan">(search, replace, options)</span>
+            </a>
+
+        </li>
+
     </ol></li>
 
 </ol></div>
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.replacestream" id="apidoc.module.replacestream">module replacestream</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.replacestream.replacestream" id="apidoc.element.replacestream.replacestream">
+        function <span class="apidocSignatureSpan"></span>replacestream
+        <span class="apidocSignatureSpan">(search, replace, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function ReplaceStream(search, replace, options) {
+  var tail = &#x27;&#x27;;
+  var totalMatches = 0;
+  var isRegex = search instanceof RegExp;
+
+  options = objectAssign({
+    limit: Infinity,
+    encoding: &#x27;utf8&#x27;,
+    maxMatchLen: 100
+  }, options);
+
+  var replaceFn = replace;
+
+  replaceFn = createReplaceFn(replace, isRegex);
+
+  var match;
+  if (isRegex) {
+    match = matchFromRegex(search, options)
+  } else {
+    match = matchFromString(search, options);
+    options.maxMatchLen = search.length;
+  }
+
+  function transform(buf, enc, cb) {
+    var matches;
+    var lastPos = 0;
+    var runningMatch = &#x27;&#x27;;
+    var matchCount = 0;
+    var rewritten = &#x27;&#x27;;
+    var haystack = tail + buf.toString(options.encoding);
+    tail = &#x27;&#x27;;
+
+    while (totalMatches &#x3c; options.limit &#x26;&#x26;
+          (matches = match.exec(haystack)) !== null) {
+
+      matchCount++;
+      var before = haystack.slice(lastPos, matches.index);
+      var regexMatch = matches;
+      lastPos = matches.index + regexMatch[0].length;
+
+      if (lastPos &#x3e; haystack.length &#x26;&#x26; regexMatch[0].length &#x3c; options.maxMatchLen) {
+        tail = regexMatch[0]
+      } else {
+        var dataToAppend = getDataToAppend(before,regexMatch);
+        rewritten += dataToAppend;
+      }
+    }
+
+    if (tail.length &#x3c; 1)
+      tail = haystack.slice(lastPos) &#x3e; options.maxMatchLen ? haystack.slice(lastPos).slice(0 - options.maxMatchLen) : haystack.slice
+(lastPos)
+
+    var dataToQueue = getDataToQueue(matchCount,haystack,rewritten,lastPos);
+    cb(null, dataToQueue);
+  }
+
+  function getDataToAppend(before, match) {
+    var dataToAppend = before;
+
+    totalMatches++;
+
+    dataToAppend += isRegex ? replaceFn.apply(this, match.concat([match.index, match.input])) : replaceFn(match[0]);
+
+    return dataToAppend;
+  }
+
+  function getDataToQueue(matchCount, haystack, rewritten, lastPos) {
+    if (matchCount &#x3e; 0) {
+      if (haystack.length &#x3e; tail.length) {
+        return rewritten + haystack.slice(lastPos, haystack.length - tail.length);
+      }
+
+      return rewritten;
+    }
+
+    return haystack.slice(0, haystack.length - tail.length);
+  }
+
+  function flush(cb) {
+    if (tail) {
+      this.push(tail);
+    }
+    cb();
+  }
+
+  return new Transform({
+    transform: transform,
+    flush: flush
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 </div>
 

@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/eugeneware/replacestream#readme"
-
-    >replacestream (v4.0.2)</a>
+    <a href="https://github.com/eugeneware/replacestream#readme">replacestream (v4.0.2)</a>
 </h1>
 <h4>A node.js through stream that does basic streaming text search and replace and is chunk boundary friendly</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.replacestream">module replacestream</a><ol>
 
@@ -86,13 +79,13 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function ReplaceStream(search, replace, options) {
-  var tail = &#x27;&#x27;;
+  var tail = '';
   var totalMatches = 0;
   var isRegex = search instanceof RegExp;
 
   options = objectAssign({
     limit: Infinity,
-    encoding: &#x27;utf8&#x27;,
+    encoding: 'utf8',
     maxMatchLen: 100
   }, options);
 
@@ -111,13 +104,13 @@
   function transform(buf, enc, cb) {
     var matches;
     var lastPos = 0;
-    var runningMatch = &#x27;&#x27;;
+    var runningMatch = '';
     var matchCount = 0;
-    var rewritten = &#x27;&#x27;;
+    var rewritten = '';
     var haystack = tail + buf.toString(options.encoding);
-    tail = &#x27;&#x27;;
+    tail = '';
 
-    while (totalMatches &#x3c; options.limit &#x26;&#x26;
+    while (totalMatches &lt; options.limit &amp;&amp;
           (matches = match.exec(haystack)) !== null) {
 
       matchCount++;
@@ -125,7 +118,7 @@
       var regexMatch = matches;
       lastPos = matches.index + regexMatch[0].length;
 
-      if (lastPos &#x3e; haystack.length &#x26;&#x26; regexMatch[0].length &#x3c; options.maxMatchLen) {
+      if (lastPos &gt; haystack.length &amp;&amp; regexMatch[0].length &lt; options.maxMatchLen) {
         tail = regexMatch[0]
       } else {
         var dataToAppend = getDataToAppend(before,regexMatch);
@@ -133,8 +126,8 @@
       }
     }
 
-    if (tail.length &#x3c; 1)
-      tail = haystack.slice(lastPos) &#x3e; options.maxMatchLen ? haystack.slice(lastPos).slice(0 - options.maxMatchLen) : haystack.slice
+    if (tail.length &lt; 1)
+      tail = haystack.slice(lastPos) &gt; options.maxMatchLen ? haystack.slice(lastPos).slice(0 - options.maxMatchLen) : haystack.slice
 (lastPos)
 
     var dataToQueue = getDataToQueue(matchCount,haystack,rewritten,lastPos);
@@ -152,8 +145,8 @@
   }
 
   function getDataToQueue(matchCount, haystack, rewritten, lastPos) {
-    if (matchCount &#x3e; 0) {
-      if (haystack.length &#x3e; tail.length) {
+    if (matchCount &gt; 0) {
+      if (haystack.length &gt; tail.length) {
         return rewritten + haystack.slice(lastPos, haystack.length - tail.length);
       }
 
@@ -187,3 +180,4 @@
     ]
 </div>
 </div>
+</body></html>
